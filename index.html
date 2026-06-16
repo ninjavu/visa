@@ -31,7 +31,14 @@
   .seg button.on{background:var(--accent);color:#fff}
   .count{color:var(--muted);font-size:12px;margin-left:auto;align-self:center}
 
-  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .tablewrap{border:1px solid var(--line);border-radius:12px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+  table{width:100%;border-collapse:collapse;background:var(--panel)}
+  /* sticky first column keeps the country visible while scrolling sideways */
+  thead th:first-child,tbody td:first-child{position:sticky;left:0;z-index:2}
+  thead th:first-child{background:#11161d}
+  tbody td:first-child{background:var(--panel)}
+  tbody tr:hover td:first-child{background:var(--panel2)}
+  .detail td:first-child{position:static}
   thead th{background:#11161d;text-align:left;padding:11px 12px;font-size:11px;text-transform:uppercase;
        letter-spacing:.04em;color:var(--muted);cursor:pointer;white-space:nowrap;border-bottom:1px solid var(--line);user-select:none}
   thead th:hover{color:var(--text)}
@@ -90,6 +97,14 @@
   @media(max-width:760px){
     .route,.col-region{display:none}
     .wrap{padding:12px}
+    thead th{padding:9px 8px;font-size:10px}
+    tbody td{padding:9px 8px}
+    .badge{white-space:normal;font-size:10.5px;padding:2px 7px}
+    .flag{font-size:15px;margin-right:5px}
+    .cty{font-size:13px}
+    .control{flex:1 1 100%}
+    select,input[type=search]{min-width:0;width:100%}
+    .count{margin-left:0}
   }
 </style>
 </head>
@@ -131,6 +146,7 @@
     <div class="count" id="count"></div>
   </div>
 
+  <div class="tablewrap">
   <table id="tbl">
     <thead>
       <tr>
@@ -146,6 +162,7 @@
     </thead>
     <tbody id="body"></tbody>
   </table>
+  </div>
 
   <div class="legend">
     <span><b>ВНЖ</b> — срок до первого вида на жительство</span>
