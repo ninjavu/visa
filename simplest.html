@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Самая простая схема паспорта для украинца (без инвестиций)</title>
+<style>
+  :root{
+    --bg:#0e1116; --panel:#161b22; --panel2:#1c232d; --line:#2a3340;
+    --text:#e6edf3; --muted:#8b98a8; --accent:#4f9dff; --accent2:#39d98a;
+    --warn:#f5a623; --bad:#ff6b6b; --chip:#222c38;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       font-size:14px;line-height:1.5}
+  a{color:var(--accent);text-decoration:none}
+  header{padding:22px 22px 14px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#131a24,#0e1116)}
+  .back{font-size:13px;color:var(--muted);display:inline-block;margin-bottom:10px}
+  .back:hover{color:var(--accent)}
+  h1{margin:0 0 4px;font-size:22px;font-weight:700}
+  .sub{color:var(--muted);font-size:13px}
+  .wrap{padding:18px 22px 70px;max-width:920px;margin:0 auto}
+
+  .hero{background:linear-gradient(180deg,#16202c,#141a22);border:1px solid var(--line);
+        border-radius:16px;padding:20px 22px;margin:18px 0;position:relative;overflow:hidden}
+  .hero:before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent2)}
+  .hero .label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent2);font-weight:700}
+  .hero h2{margin:6px 0 4px;font-size:26px}
+  .hero .flag{font-size:30px;vertical-align:-3px;margin-right:6px}
+  .hero .tag{color:var(--muted);font-size:13.5px;max-width:640px}
+  .hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .pill{background:var(--chip);border:1px solid var(--line);border-radius:20px;padding:5px 12px;font-size:12.5px}
+  .pill b{color:var(--accent2)}
+
+  .timeline{margin:26px 0 10px;position:relative;padding-left:34px}
+  .timeline:before{content:"";position:absolute;left:11px;top:6px;bottom:34px;width:2px;background:var(--line)}
+  .step{position:relative;margin-bottom:22px}
+  .step .dot{position:absolute;left:-34px;top:0;width:24px;height:24px;border-radius:50%;
+       background:var(--accent);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;
+       box-shadow:0 0 0 4px var(--bg)}
+  .step.fin .dot{background:var(--accent2)}
+  .step h3{margin:0 0 5px;font-size:16px}
+  .step .when{color:var(--accent);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+  .step p{margin:5px 0 0;color:var(--muted);font-size:13.5px}
+  .step ul{margin:7px 0 0;padding-left:18px;color:var(--muted);font-size:13px}
+  .step ul li{margin:2px 0}
+  .step .box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-top:8px}
+
+  .why{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:22px 0}
+  .why h3{margin:0 0 12px;font-size:15px}
+  .why .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:9px}
+  .why .item{display:flex;gap:9px;align-items:flex-start;font-size:13px}
+  .why .ic{color:var(--accent2);font-weight:700;flex-shrink:0}
+
+  .warn{background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.28);border-radius:12px;padding:13px 16px;margin:18px 0}
+  .warn h3{margin:0 0 8px;font-size:14px;color:var(--warn)}
+  .warn ul{margin:0;padding-left:18px;color:var(--muted);font-size:13px}
+  .warn ul li{margin:4px 0}
+
+  h2.sec{font-size:17px;margin:34px 0 12px;border-bottom:1px solid var(--line);padding-bottom:8px}
+  .alts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+  .alt{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:15px 16px}
+  .alt h4{margin:0 0 2px;font-size:16px}
+  .alt h4 .flag{font-size:19px;margin-right:6px;vertical-align:-2px}
+  .alt .yr{display:inline-block;background:rgba(57,217,138,.15);color:var(--accent2);font-size:11.5px;font-weight:700;
+       padding:2px 9px;border-radius:20px;margin:6px 0 8px}
+  .alt .yr.mid{background:rgba(245,166,35,.15);color:var(--warn)}
+  .alt p{margin:0;color:var(--muted);font-size:13px}
+  .alt .tradeoff{margin-top:8px;font-size:12px;color:#7d8895}
+  .alt .tradeoff b{color:var(--text)}
+
+  .cmp{width:100%;border-collapse:collapse;margin-top:8px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13px}
+  .cmp th,.cmp td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--line)}
+  .cmp th{background:#11161d;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.03em}
+  .cmp tr:last-child td{border-bottom:0}
+  .cmp .g{color:var(--accent2);font-weight:600}
+  .cmp .y{color:var(--warn)}
+  footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);color:#6b7787;font-size:11.5px}
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="index.html">← Назад к сравнению всех 92 стран</a>
+  <h1>🛂 Самая простая схема паспорта для украинца</h1>
+  <div class="sub">Без инвестиций · приоритет IT/удалёнка · с сохранением украинского паспорта · план «под ключ»</div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="label">★ Рекомендация — оптимальный баланс простоты, скорости и логистики</div>
+    <h2><span class="flag">🇦🇲</span>Армения</h2>
+    <div class="tag">Самый беспроблемный путь для украинца: безвиз, ВНЖ оформляется онлайн за ~месяц без вложений и без оффера, русский язык в обиходе, сильная IT-среда релокантов, двойное гражданство разрешено — украинский паспорт сохраняется. Паспорт примерно за <b>3 года</b>.</div>
+    <div class="meta">
+      <span class="pill">Паспорт: <b>~3 года</b></span>
+      <span class="pill">Инвестиции: <b>не нужны</b></span>
+      <span class="pill">Второй паспорт: <b>сохраняешь 🇺🇦</b></span>
+      <span class="pill">Въезд: <b>безвиз</b></span>
+      <span class="pill">IT: <b>★★★★★</b></span>
+    </div>
+  </div>
+
+  <div class="warn" style="background:rgba(167,119,255,.08);border-color:rgba(167,119,255,.3)">
+    <h3 style="color:#b794ff">🧬 Сначала проверь корни — возможно, паспорт тебе уже «положен»</h3>
+    <ul>
+      <li>Если среди дедов/прадедов были граждане <b>Румынии</b> (Бессарабия, Северная Буковина — Черновицкая и часть Одесской обл.), <b>болгары</b> (Бессарабия, Болград), <b>венгры</b> (Закарпатье), <b>греки</b> (Приазовье, Мариуполь), <b>поляки</b>, <b>немцы</b> или <b>евреи</b> — можно получить паспорт <b>по происхождению / репатриации</b>.</li>
+      <li>Это часто <b>самый короткий путь</b>: паспорт ЕС/второй паспорт за ~1–2 года, нередко <b>без переезда и проживания</b> в стране.</li>
+      <li>В общей таблице такие страны отмечены значком <b>🧬</b> — включи фильтр «По корням 🧬», чтобы увидеть все 27 вариантов.</li>
+    </ul>
+  </div>
+
+  <div class="timeline">
+    <div class="step">
+      <div class="dot">0</div>
+      <div class="when">День 0 · въезд</div>
+      <h3>Приезжаешь без визы</h3>
+      <p>Украинцам безвиз — до 180 дней в году. Можно сразу искать жильё и готовить документы на ВНЖ на месте, никаких консульских очередей заранее.</p>
+    </div>
+
+    <div class="step">
+      <div class="dot">1</div>
+      <div class="when">1–2 месяц · ВНЖ</div>
+      <h3>Оформляешь временный ВНЖ (онлайн, ~1 месяц)</h3>
+      <p>Без инвестиций и без вложений в недвижимость. Достаточно любого простого основания:</p>
+      <ul>
+        <li><b>ИП / своя фирма</b> — открыть индивидуального предпринимателя или ООО (для удалёнщика/фрилансера это основной путь, делается быстро и дёшево)</li>
+        <li><b>Трудоустройство</b> — оффер от армянской/релоцированной IT-компании</li>
+        <li><b>Аренда/недвижимость</b> — даже долгосрочная аренда жилья может быть основанием</li>
+      </ul>
+      <div class="box">💡 Для IT-удалёнщика проще всего — <b>ИП</b>: даёт основание для ВНЖ, низкие налоги и легально проводит твой доход.</div>
+    </div>
+
+    <div class="step">
+      <div class="dot">2</div>
+      <div class="when">Год 1–3 · проживание</div>
+      <h3>Живёшь и работаешь 3 года, продлевая ВНЖ</h3>
+      <p>Временный ВНЖ — на 1 год, продлевается; через несколько лет можно перейти на постоянный (5 лет). Работаешь удалённо или в местной IT-компании. Параллельно набираешь базовый армянский для финального шага.</p>
+    </div>
+
+    <div class="step fin">
+      <div class="dot">✓</div>
+      <div class="when">Год 3 · гражданство</div>
+      <h3>Подаёшь на гражданство — и сохраняешь украинский паспорт</h3>
+      <p>После 3 лет проживания по ВНЖ: базовый армянский + знание Конституции. Армения <b>разрешает двойное гражданство</b>, отказ от украинского не требуется.</p>
+      <div class="box">🎯 Итог: <b>🇦🇲 + 🇺🇦 два паспорта примерно за 3 года, без единого доллара инвестиций.</b></div>
+    </div>
+  </div>
+
+  <div class="why">
+    <h3>Почему именно это — «самое простое»</h3>
+    <div class="grid">
+      <div class="item"><span class="ic">✓</span><div><b>Ноль инвестиций.</b> Основание для ВНЖ — ИП, работа или аренда, а не депозит.</div></div>
+      <div class="item"><span class="ic">✓</span><div><b>Сохраняешь 🇺🇦.</b> Двойное гражданство разрешено — отказываться не нужно.</div></div>
+      <div class="item"><span class="ic">✓</span><div><b>Безвиз и онлайн.</b> Въезд без визы, ВНЖ подаётся в т.ч. дистанционно за ~месяц.</div></div>
+      <div class="item"><span class="ic">✓</span><div><b>Русский работает.</b> Минимальный языковой барьер в быту и бизнесе.</div></div>
+      <div class="item"><span class="ic">✓</span><div><b>IT-среда.</b> Много релоцированных компаний и комьюнити, низкие налоги для ИП.</div></div>
+      <div class="item"><span class="ic">✓</span><div><b>Близко.</b> 2–3 часа лёта, недорогая жизнь, привычная среда.</div></div>
+    </div>
+  </div>
+
+  <div class="warn">
+    <h3>⚠️ Подводные камни — учти заранее</h3>
+    <ul>
+      <li><b>Реально жить там.</b> Срок до паспорта = годы фактического проживания, а не просто наличие карточки ВНЖ. Длинные отлучки могут обнулить стаж.</li>
+      <li><b>Финальный армянский.</b> На гражданство нужен базовый армянский язык и знание Конституции — начни учить заранее.</li>
+      <li><b>Украинская сторона.</b> С 2026 Украина легализовала двойное гражданство, но список «разрешённых» стран и порядок ещё формируются — следи за официальными обновлениями.</li>
+      <li><b>Документы.</b> Загранпаспорт должен быть действующим (не «продлённым») — для некоторых стран это критично.</li>
+    </ul>
+  </div>
+
+  <h2 class="sec">Альтернативы — если приоритеты другие</h2>
+  <div class="alts">
+    <div class="alt">
+      <h4><span class="flag">🇦🇷</span>Аргентина</h4>
+      <div class="yr">паспорт за 2 года — самый быстрый</div>
+      <p>Самое быстрое гражданство в мире без инвестиций: 2 года проживания → паспорт через суд. Двойное разрешено, языкового экзамена по сути нет, безвизовый въезд.</p>
+      <div class="tradeoff"><b>Минус:</b> далеко и дорого лететь, нестабильная экономика и песо, нужно реально прожить 2 года.</div>
+    </div>
+    <div class="alt">
+      <h4><span class="flag">🇪🇨</span>Эквадор</h4>
+      <div class="yr">паспорт за 3 года</div>
+      <p>Низкий порог дохода, экономика на долларах США (без валютных рисков), двойное гражданство в Конституции. Профессиональная виза по украинскому диплому (после признания).</p>
+      <div class="tradeoff"><b>Минус:</b> нужен испанский на гражданство, далеко, меньше IT-комьюнити.</div>
+    </div>
+    <div class="alt">
+      <h4><span class="flag">🇷🇸</span>Сербия</h4>
+      <div class="yr mid">паспорт за ~6 лет</div>
+      <p>Безвиз, очень простое открытие ИП/фирмы, низкие налоги для IT, славянская среда и близость к ЕС. ПМЖ через 3 года, гражданство ещё через ~3.</p>
+      <div class="tradeoff"><b>Минус:</b> до паспорта дольше; зато процесс лёгкий и привычный по культуре.</div>
+    </div>
+  </div>
+
+  <h2 class="sec">Сравнение топ-вариантов без инвестиций</h2>
+  <table class="cmp">
+    <thead>
+      <tr><th>Страна</th><th>Паспорт</th><th>Двойное</th><th>Язык на гр-во</th><th>IT</th><th>Логистика для 🇺🇦</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>🇦🇲 Армения</td><td class="g">~3 года</td><td class="g">да</td><td>базовый армянский</td><td>★★★★★</td><td class="g">очень удобно (близко, рус.)</td></tr>
+      <tr><td>🇦🇷 Аргентина</td><td class="g">2 года</td><td class="g">да</td><td class="g">экзамена нет</td><td>★★★☆☆</td><td class="y">далеко, нестаб. эконом.</td></tr>
+      <tr><td>🇪🇨 Эквадор</td><td class="g">3 года</td><td class="g">да</td><td>испанский</td><td>★★★★☆</td><td class="y">далеко</td></tr>
+      <tr><td>🇧🇴 Боливия</td><td class="g">3 года</td><td class="g">да</td><td>испанский</td><td>★★☆☆☆</td><td class="y">далеко, нужна виза</td></tr>
+      <tr><td>🇷🇸 Сербия</td><td class="y">~6 лет</td><td class="g">да</td><td>сербский</td><td>★★★☆☆</td><td class="g">удобно (безвиз, близко)</td></tr>
+      <tr><td>🇧🇷 Бразилия</td><td class="y">~4–5 лет</td><td class="g">да</td><td>португальский</td><td>★★★☆☆</td><td class="y">далеко (но DNV в стаж)</td></tr>
+    </tbody>
+  </table>
+
+  <footer>
+    Сроки ориентировочные и означают «при идеальном сценарии» (непрерывное проживание, чистая история, вовремя поданные документы). Реальные сроки могут быть длиннее из-за очередей и судебной обработки. Иммиграционные правила меняются — сверяйтесь с официальными источниками или иммиграционным юристом перед решением. · <a href="index.html">Полное сравнение 92 стран →</a>
+  </footer>
+
+</div>
+</body>
+</html>
